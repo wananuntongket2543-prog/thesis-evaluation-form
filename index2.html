@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบสอบถามความพึงพอใจของผู้ใช้งาน (User Satisfaction Survey)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* --- ธีมใหม่: Navy & Teal --- */
+        :root {
+            --buu-light-blue: #20b2aa; /* สีเขียวมินต์ */
+            --buu-dark-blue: #002d5a;  /* สีน้ำเงินเข้ม */
+            --buu-grey: #f0f2f5; 
+            --buu-white: #ffffff;
+        }
+
+        body {
+            background-color: var(--buu-grey);
+            font-family: 'Sarabun', Tahoma, sans-serif;
+            color: #333;
+        }
+        .form-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--buu-white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 8px solid var(--buu-dark-blue);
+        }
+        .header-logo {
+            margin-bottom: 20px;
+        }
+        .header-logo img {
+            max-height: 120px; 
+        }
+        .section-title {
+            background-color: #e9ecef;
+            padding: 10px 15px;
+            border-left: 5px solid var(--buu-light-blue);
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: var(--buu-dark-blue);
+        }
+        .form-label {
+            color: var(--buu-dark-blue);
+            font-weight: 500;
+        }
+        .form-control:focus {
+            border-color: var(--buu-light-blue);
+            box-shadow: 0 0 0 0.25rem rgba(32, 178, 170, 0.25);
+        }
+        .form-check-input:checked {
+            background-color: var(--buu-dark-blue);
+            border-color: var(--buu-dark-blue);
+        }
+        .radio-cell {
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        /* เปลี่ยนสีหัวตารางเป็น Navy Blue */
+        .table-primary-buu th {
+            background-color: #002d5a !important;
+            color: #ffffff !important;
+            text-align: center;
+            font-size: 0.9rem;
+            vertical-align: middle;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+        .alert-info {
+            background-color: #e0f2f1;
+            border-color: #b2dfdb;
+            color: #004d40;
+        }
+        .btn-buu {
+            background-color: var(--buu-dark-blue);
+            color: var(--buu-white);
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn-buu:hover {
+            background-color: var(--buu-light-blue);
+            color: var(--buu-white);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        
+        <div class="header-logo text-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Buu-logo11.png" alt="Burapha University Logo">
+        </div>
+
+        <div class="text-center mb-4">
+            <h3 class="mb-3" style="color: var(--buu-dark-blue); font-weight: bold;">แบบสอบถามความพึงพอใจของผู้ใช้งาน (User Satisfaction Survey)</h3>
+            <h6 class="text-muted lh-base">
+                การพัฒนาแบบจำลอง Machine Learning เพื่อวิเคราะห์ความสัมพันธ์ระหว่างผลสัมฤทธิ์ทางการเรียนในห้องเรียนกับผลการสอบมาตรฐาน Ordinary National Educational Test ของนักเรียนชั้นมัธยมศึกษา
+            </h6>
+        </div>
+
+        <div class="alert alert-info text-justify">
+            <strong>คำชี้แจง:</strong><div class="mb-1"></div>1.แบบสอบถามนี้มีวัตถุประสงค์เพื่อศึกษาความพึงพอใจของครูและบุคลากรทางการศึกษาที่มีต่อ"ระบบสารสนเทศเพื่อการพยากรณ์ผลการเรียน" ที่ผู้วิจัยพัฒนาขึ้น
+            </strong><div class="mb-1"></div>2.คำนิยาม: "ระบบพยากรณ์" ในที่นี้หมายถึง โปรแกรมคอมพิวเตอร์ที่ช่วยวิเคราะห์แนวโน้มผลคะแนน O-NET ของนักเรียนล่วงหน้า โดยใช้ข้อมูลผลสัมฤทธิ์ทางการเรียนในอดีตมาประมวลผล
+            </strong><div class="mb-1"></div>3.ข้อมูลที่ได้จากการตอบแบบสอบถามจะถูกนำไปวิเคราะห์และสรุปผลในภาพรวมเพื่อการวิจัยเท่านั้น และไม่มีผลกระทบใดๆ ต่อผู้ตอบแบบสอบถาม
+            </strong><div class="mb-1"></div>4.แบบสอบถามแบ่งออกเป็น 3 ส่วน ประกอบด้วย
+        <div class="d-flex justify-content-center mt-2">
+            
+            <div>
+                <div class="mb-1">ส่วนที่ 1:ข้อมูลทั่วไปของผู้ตอบแบบสอบถามส่วนที่</div>
+                <div class="mb-1">ส่วนที่ 2:ความพึงพอใจต่อการใช้งานระบบ(มาตราส่วนประมาณค่า 5 ระดับ)</div>
+                <div class="mb-1">ส่วนที่ 3:ข้อเสนอแนะเพิ่มเติม</div>
+            </div>
+            
+        </div>
+        
+
+        <script type="text/javascript">var submitted=false;</script>
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){alert('บันทึกข้อมูลสำเร็จ ขอขอบพระคุณเป็นอย่างสูงสำหรับความร่วมมือในการทำงานวิจัยครั้งนี้'); window.location.reload();}"></iframe>
+
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLScoYZvLjB2M5L_VrUaWFQxm1UksWnntZfFr2YoHQNjg3W2oCA/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+
+            <input type="hidden" name="fvv" value="1">
+            <input type="hidden" name="pageHistory" value="0,1,2,3">       
+</div>
+
+    <div class="section-title"><strong>ส่วนที่ 1: ข้อมูลทั่วไป</strong></div>
+<div class="mb-4" style="font-size: 0.95rem;">
+    <strong>คำชี้แจง:</strong> โปรดทำเครื่องหมาย ✓ ลงในช่อง ▢ หน้าข้อความที่ตรงกับความเป็นจริง
+    <div class="mb-3">
+    
+        <div class="mb-3">
+            <label class="form-label"><strong>1.ตำแหน่ง/คุณวุฒิ</strong></label>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="entry.500104714" id="pos1" value="ครูผู้สอน" onclick="toggleOtherInput(false)" required>
+                <label class="form-check-label" for="pos1">ครูผู้สอน</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="entry.500104714" id="pos2" value="หัวหน้างานวัดและประเมินผล / งานทะเบียน" onclick="toggleOtherInput(false)">
+                <label class="form-check-label" for="pos2">หัวหน้างานวัดและประเมินผล / งานทะเบียน</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="entry.500104714" id="pos3" value="หัวหน้ากลุ่มสาระการเรียนรู้ / ฝ่ายบริหารวิชาการ" onclick="toggleOtherInput(false)">
+                <label class="form-check-label" for="pos3">หัวหน้ากลุ่มสาระการเรียนรู้ / ฝ่ายบริหารวิชาการ</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="entry.500104714" id="optionOther" value="__other_option__" onclick="toggleOtherInput(true)">
+                <label class="form-check-label" for="optionOther">อื่นๆ (โปรดระบุ)</label>
+            </div>
+
+            <div id="otherInputContainer" style="display: none;" class="mt-2">
+                <input type="text" class="form-control" id="otherInputText" name="entry.500104714.other_option_response" placeholder="โปรดระบุตำแหน่งของคุณ">
+            </div>
+        </div>
+
+        <script>
+        function toggleOtherInput(show) {
+            var container = document.getElementById('otherInputContainer');
+            var inputField = document.getElementById('otherInputText');
+            
+            if (show) {
+                container.style.display = 'block';
+                inputField.setAttribute('required', '');
+            } else {
+                container.style.display = 'none';
+                inputField.removeAttribute('required');
+                inputField.value = ''; 
+            }
+        }
+        </script>
+        <div class="mb-3">
+            <label class="form-label"><strong>2.ประสบการณ์ในการปฏิบัติงานสอน</strong></label>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="entry.307743811" id="exp1" value="น้อยกว่า 5 ปี" required>
+                <label class="form-check-label" for="exp1">น้อยกว่า 5 ปี</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="entry.307743811" id="exp2" value="5 - 10 ปี">
+                <label class="form-check-label" for="exp2">5 - 10 ปี</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="entry.307743811" id="exp3" value="มากกว่า 10 ปี">
+                <label class="form-check-label" for="exp3">มากกว่า 10 ปี</label>
+            </div>
+
+
+         <div class="section-title"><strong>ส่วนที่ 2: ความพึงพอใจต่อการใช้งานระบบ</strong></div>
+<div class="mb-4" style="font-size: 0.95rem;">
+    <strong>คำชี้แจง:</strong> กรุณาทำเครื่องหมาย ✓ ลงในช่องที่ตรงกับความคิดเห็นของท่านมากที่สุด
+    
+    <div class="d-flex justify-content-center mt-2">
+        <div>
+            <div class="mb-1">5 หมายถึง มีความเหมาะสม มากที่สุด</div>
+            <div class="mb-1">4 หมายถึง มีความเหมาะสม มาก</div>
+            <div class="mb-1">3 หมายถึง มีความเหมาะสม ปานกลาง</div>
+            <div class="mb-1">2 หมายถึง มีความเหมาะสม น้อย</div>
+            <div class="mb-1">1 หมายถึง มีความเหมาะสม น้อยที่สุด</div>
+        </div>
+    </div>
+</div>
+
+            <h5 class="mt-4 mb-3" style="color: var(--buu-dark-blue); font-weight: 600;">ด้านที่ 1: ด้านประสิทธิภาพเชิงหน้าที่ (Functional Efficiency)</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover align-middle">
+                    <thead class="table-primary-buu">
+                        <tr>
+                            <th style="width: 50%;">รายการประเมิน</th>
+                            <th style="width: 10%;">5</th>
+                            <th style="width: 10%;">4</th>
+                            <th style="width: 10%;">3</th>
+                            <th style="width: 10%;">2</th>
+                            <th style="width: 10%;">1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1.1 ระบบสามารถประมวลผลและแสดงผลการทำนายคะแนนได้รวดเร็ว ทันต่อความต้องการใช้งาน</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1313607010" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1313607010" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1313607010" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1313607010" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1313607010" value="1 น้อยที่สุด"></td>
+                        </tr>
+                        <tr>
+                            <td>1.2 ผลการพยากรณ์คะแนน O-NET มีความสอดคล้องกับศักยภาพจริงของผู้เรียน (มีความสมเหตุสมผลน่าเชื่อถือ)</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.998300439" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.998300439" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.998300439" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.998300439" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.998300439" value="1 น้อยที่สุด"></td>
+                        </tr>
+                         <tr>
+                            <td>1.3 ระบบมีเสถียรภาพ สามารถทำงานได้ต่อเนื่องโดยไม่เกิดข้อขัดข้อง (Error) ระหว่างการใช้งาน</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1745679763" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1745679763" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1745679763" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1745679763" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1745679763" value="1 น้อยที่สุด"></td>
+                        </tr>
+                         <tr>
+                            <td>1.4 ขั้นตอนการนำเข้าข้อมูล (เช่น การอัปโหลดไฟล์เกรด Excel) มีความสะดวกและไม่ซับซ้อน</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.411513287" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.411513287" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.411513287" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.411513287" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.411513287" value="1 น้อยที่สุด"></td>
+                        </tr>
+                         <tr>
+                            <td>1.5 ระบบมีการแจ้งเตือนหรือคำอธิบายที่ชัดเจน เมื่อผู้ใช้งานกรอกข้อมูลไม่ครบถ้วนหรือไม่ถูกต้อง</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.564051869" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.564051869" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.564051869" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.564051869" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.564051869" value="1 น้อยที่สุด"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h5 class="mt-4 mb-3" style="color: var(--buu-dark-blue); font-weight: 600;">ด้านที่ 2: ด้านการออกแบบและการใช้งาน (Usability Design)</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover align-middle">
+                    <thead class="table-primary-buu">
+                        <tr>
+                            <th style="width: 50%;">รายการประเมิน</th>
+                            <th style="width: 10%;">5</th>
+                            <th style="width: 10%;">4</th>
+                            <th style="width: 10%;">3</th>
+                            <th style="width: 10%;">2</th>
+                            <th style="width: 10%;">1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2.1	การจัดวางเมนูและลำดับขั้นตอนการทำงานมีความเป็นระบบ เข้าใจได้ง่ายโดยไม่ต้องใช้คู่มือ</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1577776882" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1577776882" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1577776882" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1577776882" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1577776882" value="1 น้อยที่สุด"></td>
+                        </tr>
+                        <tr>
+                            <td>2.2	ความเหมาะสมของขนาดตัวอักษร รูปแบบตัวอักษร และการใช้สีสัน สบายตาและอ่านได้ชัดเจน</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1084881491" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1084881491" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1084881491" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1084881491" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1084881491" value="1 น้อยที่สุด"></td>
+                        </tr>
+                        <tr>
+                            <td>2.3	การนำเสนอผลลัพธ์ในรูปแบบ "สารสนเทศ" (เช่น กราฟ แผนภูมิ หรือตาราง) ช่วยให้เข้าใจข้อมูลได้ง่ายและชัดเจน</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1098144426" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1098144426" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1098144426" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1098144426" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1098144426" value="1 น้อยที่สุด"></td>
+                        </tr>
+                        <tr>
+                            <td>2.4	ภาษาที่ใช้สื่อสารในระบบ (เช่น ชื่อปุ่ม, คำอธิบาย) เป็นภาษาที่สื่อความหมายชัดเจน ตรงกับบริบทการทำงานของโรงเรียน</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1223481455" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1223481455" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1223481455" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1223481455" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1223481455" value="1 น้อยที่สุด"></td>
+                        </tr>
+                            <td>2.5	ระบบรองรับการใช้งานผ่านอุปกรณ์ที่หลากหลาย (เช่น คอมพิวเตอร์, แท็บเล็ต) ได้อย่างมีประสิทธิภาพ</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1996648416" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1996648416" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1996648416" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1996648416" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1996648416" value="1 น้อยที่สุด"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h5 class="mt-4 mb-3" style="color: var(--buu-dark-blue); font-weight: 600;">ด้านที่ 3: ด้านประโยชน์ต่อการจัดการเรียนรู้ (Educational Utility)</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover align-middle">
+                    <thead class="table-primary-buu">
+                        <tr>
+                            <th style="width: 50%;">รายการประเมิน</th>
+                            <th style="width: 10%;">5</th>
+                            <th style="width: 10%;">4</th>
+                            <th style="width: 10%;">3</th>
+                            <th style="width: 10%;">2</th>
+                            <th style="width: 10%;">1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>3.1 การแสดงผล "แนวโน้มการเปลี่ยนแปลงคะแนน" มีความชัดเจนและสื่อความหมายได้ดี</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1641965897" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1641965897" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1641965897" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1641965897" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1641965897" value="1 น้อยที่สุด"></td>
+                        </tr>
+                        <tr>
+                            <td>3.1 ระบบช่วยจำแนกกลุ่มผู้เรียน (เช่น กลุ่มเสี่ยง, กลุ่มเก่ง) ได้อย่างชัดเจน ช่วยให้ครูดูแลนักเรียนได้ตรงจุด</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.44742386" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.44742386" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.44742386" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.44742386" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.44742386" value="1 น้อยที่สุด"></td>
+                        </tr>
+                        <tr>
+                            <td>3.2 ข้อมูลจากการพยากรณ์เป็นประโยชน์ต่อการวางแผนพัฒนาผู้เรียนเป็นรายบุคคล (Individual Development Plan)</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.261530151" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.261530151" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.261530151" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.261530151" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.261530151" value="1 น้อยที่สุด"></td>
+                        </tr>
+                        <tr>
+                            <td>3.4 สารสนเทศที่ได้จากระบบสามารถนำไปใช้ประกอบการจัดทำรายงานหรือวางแผนงานวิชาการของโรงเรียนได้</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.230184194" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.230184194" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.230184194" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.230184194" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.230184194" value="1 น้อยที่สุด"></td>
+                        </tr>
+                        <tr>
+                            <td>3.5 ความพึงพอใจในภาพรวม และความเหมาะสมในการนำระบบไปประยุกต์ใช้จริงในสถานศึกษา</td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1985091119" value="5 มากที่สุด" required></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1985091119" value="4 มาก"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1985091119" value="3 ปานกลาง"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1985091119" value="2 น้อย"></td>
+                            <td class="radio-cell"><input class="form-check-input" type="radio" name="entry.1985091119" value="1 น้อยที่สุด"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                  <div class="section-title">ส่วนที่ 3: ข้อเสนอแนะเพิ่มเติม</div>
+            <div class="mb-4">
+                <label class="form-label">3.1 ข้อเสนอแนะเพิ่มเติม</label>
+                <textarea class="form-control" name="entry.885963022" rows="4" placeholder="ระบุข้อเสนอแนะของท่าน (หากมี)"></textarea>
+            </div>
+            <div class="text-center mt-5">
+                <button type="submit" class="btn btn-buu btn-lg px-5">ส่งแบบประเมิน</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
